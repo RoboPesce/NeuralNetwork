@@ -17,6 +17,7 @@ double dot(std::vector<double>& a, std::vector<double>& b)
 
 int maxIndex(std::vector<double>& v)
 {
+    std::cout << "Running maxIndex" << std::endl;
     int maxind = 0;
     for(size_t i = 0; i < v.size(); i++) 
     {
@@ -26,11 +27,8 @@ int maxIndex(std::vector<double>& v)
     return maxind;
 }
 
-template <typename vtype>
-std::ostream& operator<<(std::ostream& os, const std::vector<vtype>& v)
+std::ostream& operator<<(std::ostream& os, const Point& p)
 {
-    os << '[';
-    for (size_t i = 0; i < v.size()-1; ++i) os << v[i] << ' ';
-    os << v[v.size()-1] << ']';
+    os << '(' << p.x << ", " << p.y << ')';
     return os;
 }

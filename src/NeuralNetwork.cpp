@@ -18,6 +18,7 @@ double NeuralNetwork::sigmoid(double x)
 // Predicts the output values for a given input point, using the current weights and biases
 vector<double> NeuralNetwork::predict(Point& p)
 {
+    cout << "Attempting to predict " << p << endl;
     // Initialize the input vector with the coordinates of the input point
     vector<double> input = {p.x, p.y};
 

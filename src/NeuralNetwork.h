@@ -3,13 +3,6 @@
 
 #include "GlobalHelpers.h"
 
-// A simple struct to represent a 2D point
-struct Point
-{
-    double x;
-    double y;
-};
-
 // A simple class to represent a neural network
 // with two input nodes, one hidden layer with two nodes,
 // and one output node.

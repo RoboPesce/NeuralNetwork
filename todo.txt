@@ -4,4 +4,4 @@ Make training and error functions
 Make training datasets
 Implement a layer weight vector?
 
-g++ -g -Wall main.cpp NeuralNetwork.cpp GlobalHelpers.cpp -o neuralnet
+g++ -g -Wall src/main.cpp src/NeuralNetwork.cpp src/GlobalHelpers.cpp -o neuralnet
