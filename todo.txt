@@ -2,3 +2,5 @@ Create parser and file format to set up layers
 Make training and error functions
 Make training datasets
 Implement a layer weight vector?
+
+g++ -g -Wall main.cpp NeuralNetwork.cpp GlobalHelpers.cpp -o neuralnet

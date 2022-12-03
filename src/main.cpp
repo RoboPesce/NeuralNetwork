@@ -7,16 +7,18 @@ std::ostream& operator<<(std::ostream& os, const Point& p);
 
 int main()
 {
-    srand(time(NULL));
+    Randomizer random;
 
     // Create a neural network
     NeuralNetwork nn(2);
 
     // Create a point
-    Point p = {randDouble(),randDouble()};
+    Point p = {random.randDouble(), random.randDouble()};
 
     // Predict the label for the point using the neural network
     vector<double> prediction = nn.predict(p);
+    cout << "got here" << endl;
+    cout << prediction << endl;
     int label = maxIndex(prediction);
 
     // Print the predicted label
