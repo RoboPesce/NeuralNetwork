@@ -1,9 +1,8 @@
 #include "NeuralNetwork.h"
-#include "GlobalHelpers.h"
 
 using namespace std;
 
-std::ostream& operator<<(std::ostream& os, const Point& p);
+ostream& operator<<(ostream& os, const Point& p);
 
 int main()
 {
@@ -27,7 +26,7 @@ int main()
     return 0;
 }
 
-std::ostream& operator<<(std::ostream& os, const Point& p)
+ostream& operator<<(ostream& os, const Point& p)
 {
     os << '(' << p.x << ", " << p.y << ')';
     return os;

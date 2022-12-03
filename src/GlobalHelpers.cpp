@@ -1,8 +1,6 @@
 #include "GlobalHelpers.h"
 
-using namespace std;
-
-double dot(vector<double>& a, vector<double>& b)
+double dot(std::vector<double>& a, std::vector<double>& b)
 {
     double output = 0;
 
@@ -22,14 +20,14 @@ int maxIndex(std::vector<double>& v)
     int maxind = 0;
     for(size_t i = 0; i < v.size(); i++) 
     {
-        cout << v[maxind] << " " << v[i] << endl;
+        std::cout << v[maxind] << " " << v[i] << std::endl;
         if(v[maxind] < v[i]) maxind = i;
     }
     return maxind;
 }
 
-template <typename T>
-std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
+template <typename vtype>
+std::ostream& operator<<(std::ostream& os, const std::vector<vtype>& v)
 {
     os << '[';
     for (size_t i = 0; i < v.size()-1; ++i) os << v[i] << ' ';

@@ -32,9 +32,9 @@ vector<double> NeuralNetwork::predict(Point& p)
         // 3 apply the sigmoid function
         for (size_t i = 0; i < output.size(); i++)
         {
-            output[i] = dot(input, weights[layer][i]);
+            output[i] =  dot(input, weights[layer][i]);
             output[i] += biases[layer][i];
-            output[i] = sigmoid(output[i]);
+            output[i] =  sigmoid(output[i]);
         }
         // Update the input for the next layer of the network
         input = output;

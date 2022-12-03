@@ -1,8 +1,6 @@
 #ifndef NEURALNETWORK_H
 #define NEURALNETWORK_H
 
-#include <vector>
-#include <cmath>
 #include "GlobalHelpers.h"
 
 // A simple struct to represent a 2D point
