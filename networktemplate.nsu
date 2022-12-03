@@ -1,0 +1,18 @@
+[int inputsize]
+[int numlayers] // >=1
+
+//parameters for hidden layers
+//if the size of any node's weights doesn't agree
+//with the size of the previous layer, should thow
+//an error.
+//Also all weights should be between 0 and 1.
+//Otherwise should throw an error as well.
+[int layer1size]
+[double[] node1weights[prevnode1weight prevnode2 weight...]...nodeNweights[...prevnodeMweight]
+[double node1bias]...[double nodeNbias]
+.
+.
+.
+[int outputlayersize]
+[double[] node1weights[prevnode1weight prevnode2 weight...]...nodeNweights[...prevnodeMweight]
+[double node1bias]...[double nodeNbias]

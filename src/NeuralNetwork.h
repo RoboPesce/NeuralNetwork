@@ -9,12 +9,14 @@
 class NeuralNetwork
 {
 private:
+    //for parsing NSU file
+    NSUParser nsu;
     // Vector of weights, where each element is a vector of weights for a layer of the network
     std::vector<std::vector<std::vector<double>>> weights;
     // Vector of biases, where each element is a vector of biases for a layer of the network
     std::vector<std::vector<double>> biases;
 public:
-    NeuralNetwork(int num_layers);
+    NeuralNetwork(char* fname);
 
     // The activation function for the nodes in the network
     double sigmoid(double x);

@@ -1,13 +1,13 @@
 #include "NeuralNetwork.h"
+#include "NSUParser.h"
 
 using namespace std;
 
 double RandDouble();
 
-NeuralNetwork::NeuralNetwork(int num_layers)
+NeuralNetwork::NeuralNetwork(char* fname) : nsu(fname) 
 {
-    weights.resize(num_layers - 1);
-    biases.resize(num_layers - 1);
+    if(!nsu.parse(weights, biases)) cout << "File invalid." << endl;
 }
 
 double NeuralNetwork::sigmoid(double x)

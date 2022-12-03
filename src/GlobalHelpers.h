@@ -6,6 +6,8 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <fstream>
+#include <string>
 
 // A simple struct to represent a 2D point
 struct Point
