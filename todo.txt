@@ -1,4 +1,3 @@
-Implement randomizer
 Create parser and file format to set up layers
 Make training and error functions
 Make training datasets
