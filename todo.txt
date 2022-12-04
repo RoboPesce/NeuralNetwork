@@ -1,7 +1,6 @@
 Make training functions
 Make training datasets
 Make dataset parser
-Write network to output file so it can be reused after training
 rewrite to work with vectors instead of points
 Implement a layer weight vector?
 
