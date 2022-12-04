@@ -7,7 +7,6 @@ double RandDouble();
 NeuralNetwork::NeuralNetwork(string fname) : nsu(fname)
 {
     if(nsu.parse(weights, biases)) cout << "File invalid." << endl;
-    cout << weights.size() << " " << biases.size() << endl;
 }
 
 double NeuralNetwork::sigmoid(double x)
@@ -38,10 +37,10 @@ vector<double> NeuralNetwork::predict(Point& p)
             output[i] =  sigmoid(output[i]);
         }
         // Update the input for the next layer of the network
-        cout << "Output for layer " << layer+2 << ": " << output << endl;
         input = output;
     }
 
+    cout << "Probabilities: " << input << endl;
     // Return the predicted output values
     return input;
 }
@@ -49,11 +48,16 @@ vector<double> NeuralNetwork::predict(Point& p)
 // Calculates the cross-entropy loss between the predicted output
 // and the desired output for a given input.
 // @param desired_output an array of 0s where index of desired category is 1
- double calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output) 
+ double NeuralNetwork::calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output) 
 {
     double error = 0.0;
     for (size_t i = 0; i < predicted_output.size(); i++) 
         error += -(desired_output[i] * log(predicted_output[i]) + (1 - desired_output[i]) * log(1 - predicted_output[i]));
     return error;
+}
+
+void NeuralNetwork::updateNetwork()
+{
+    nsu.write(weights, biases);
 }
 
