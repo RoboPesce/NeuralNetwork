@@ -45,3 +45,15 @@ vector<double> NeuralNetwork::predict(Point& p)
     // Return the predicted output values
     return input;
 }
+
+// Calculates the cross-entropy loss between the predicted output
+// and the desired output for a given input.
+// @param desired_output an array of 0s where index of desired category is 1
+ double calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output) 
+{
+    double error = 0.0;
+    for (size_t i = 0; i < predicted_output.size(); i++) 
+        error += -(desired_output[i] * log(predicted_output[i]) + (1 - desired_output[i]) * log(1 - predicted_output[i]));
+    return error;
+}
+

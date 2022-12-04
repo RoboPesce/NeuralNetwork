@@ -25,6 +25,8 @@ public:
     // The forward propagation function, which takes in a point
     // and returns the predicted label (0 or 1) for the point
     std::vector<double> predict(Point& point);
+
+    double calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
 };
 
 #endif

@@ -1,6 +1,8 @@
-Create parser and file format to set up layers
-Make training and error functions
+Make training functions
 Make training datasets
+Make dataset parser
+Write network to output file so it can be reused after training
+rewrite to work with vectors instead of points
 Implement a layer weight vector?
 
 g++ -g -Wall src/main.cpp src/NeuralNetwork.cpp src/GlobalHelpers.cpp src/NSUParser.cpp -o neuralnet
