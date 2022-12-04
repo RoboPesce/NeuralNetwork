@@ -13,7 +13,7 @@ int main()
     Point p = {random.randDouble(), random.randDouble()};
 
     // Predict the label for the point using the neural network
-    vector<double> prediction = nn.predict(p);
+    vector<double> prediction = softmax(nn.predict(p));
     int label = maxIndex(prediction);
 
     // Print the predicted label
@@ -26,7 +26,7 @@ int main()
     double error = nn.calculateError(prediction, des_pred);
     cout << "Error: " << error << endl;
 
-    nn.updateNetwork();
+    //nn.updateNetwork();
 
     return 0;
 }

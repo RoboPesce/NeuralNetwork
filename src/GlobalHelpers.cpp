@@ -27,3 +27,25 @@ std::ostream& operator<<(std::ostream& os, const Point& p)
     os << '(' << p.x << ", " << p.y << ')';
     return os;
 }
+
+//activation function
+double sigmoid(double x)
+{
+    return 1.0 / (1.0 + exp(-x));
+}
+
+//converts raw probabilities to normalized probabilities
+std::vector<double> softmax(std::vector<double>& v)
+{
+    std::vector<double> soft = v;
+
+    double den_sum = 0;
+    for(size_t i = 0; i < soft.size(); i++) 
+    {
+        soft[i] = exp(soft[i]);
+        den_sum += soft[i];
+    }
+    for(size_t i = 0; i < soft.size(); i++) soft[i] /= den_sum;
+
+    return soft;
+}

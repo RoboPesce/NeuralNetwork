@@ -9,11 +9,6 @@ NeuralNetwork::NeuralNetwork(string fname) : nsu(fname)
     if(nsu.parse(weights, biases)) cout << "File invalid." << endl;
 }
 
-double NeuralNetwork::sigmoid(double x)
-{
-    return 1.0 / (1.0 + exp(-x));
-}
-
 // Predicts the output values for a given input point, using the current weights and biases
 vector<double> NeuralNetwork::predict(Point& p)
 {
