@@ -1,13 +1,13 @@
 #include "NeuralNetwork.h"
-#include "NSUParser.h"
 
 using namespace std;
 
 double RandDouble();
 
-NeuralNetwork::NeuralNetwork(char* fname) : nsu(fname) 
+NeuralNetwork::NeuralNetwork(string fname) : nsu(fname)
 {
-    if(!nsu.parse(weights, biases)) cout << "File invalid." << endl;
+    if(nsu.parse(weights, biases)) cout << "File invalid." << endl;
+    cout << weights.size() << " " << biases.size() << endl;
 }
 
 double NeuralNetwork::sigmoid(double x)
@@ -26,7 +26,7 @@ vector<double> NeuralNetwork::predict(Point& p)
     for (size_t layer = 0; layer < weights.size(); layer++)
     {
         // The output vector will be the number of nodes in the layer
-        vector<double> output = vector<double>(biases[layer].size());
+        vector<double> output(biases[layer].size());
 
         // 1 sum the weighted values of inputs
         // 2 add bias
@@ -38,6 +38,7 @@ vector<double> NeuralNetwork::predict(Point& p)
             output[i] =  sigmoid(output[i]);
         }
         // Update the input for the next layer of the network
+        cout << "Output for layer " << layer+2 << ": " << output << endl;
         input = output;
     }
 

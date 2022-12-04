@@ -17,13 +17,8 @@ double dot(std::vector<double>& a, std::vector<double>& b)
 
 int maxIndex(std::vector<double>& v)
 {
-    std::cout << "Running maxIndex" << std::endl;
     int maxind = 0;
-    for(size_t i = 0; i < v.size(); i++) 
-    {
-        std::cout << v[maxind] << " " << v[i] << std::endl;
-        if(v[maxind] < v[i]) maxind = i;
-    }
+    for(size_t i = 0; i < v.size(); i++) if(v[maxind] < v[i]) maxind = i;
     return maxind;
 }
 

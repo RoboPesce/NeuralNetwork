@@ -1,3 +1,6 @@
+#ifndef NSUPARSER_H
+#define NSUPARSER_H
+
 #include "GlobalHelpers.h"
 
 //The NSU (Network Set Up) file type is specifically for defining 
@@ -5,9 +8,11 @@
 class NSUParser
 {
 public:
-    NSUParser(char* fname);
+    NSUParser(std::string fname);
     //returns 0 if all works, else returns 1
-    int parse(std::vector<std::vector<std::vector<double>>> weights, std::vector<std::vector<double>> biases);
+    int parse(std::vector<std::vector<std::vector<double>>>& weights, std::vector<std::vector<double>>& biases);
 private:
     std::ifstream file;
 };
+
+#endif

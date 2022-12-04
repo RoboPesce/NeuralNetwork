@@ -7,7 +7,7 @@ int main()
     Randomizer random;
 
     // Create a neural network
-    NeuralNetwork nn(1);
+    NeuralNetwork nn("network1.nsu");
 
     // Create a point
     Point p = {random.randDouble(), random.randDouble()};
@@ -15,10 +15,7 @@ int main()
     // Predict the label for the point using the neural network
     vector<double> prediction = nn.predict(p);
 
-    for(size_t i = 0; i < prediction.size(); i++) cout << prediction[i] << ' ';
-    cout << endl;
-
-    cout << prediction << endl;
+    cout << "Probabilities: " << prediction << endl;
     int label = maxIndex(prediction);
 
     // Print the predicted label

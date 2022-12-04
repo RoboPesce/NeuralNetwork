@@ -8,6 +8,7 @@
 #include <cmath>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 // A simple struct to represent a 2D point
 struct Point

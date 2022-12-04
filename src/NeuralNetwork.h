@@ -2,6 +2,7 @@
 #define NEURALNETWORK_H
 
 #include "GlobalHelpers.h"
+#include "NSUParser.h"
 
 // A simple class to represent a neural network
 // with two input nodes, one hidden layer with two nodes,
@@ -16,7 +17,7 @@ private:
     // Vector of biases, where each element is a vector of biases for a layer of the network
     std::vector<std::vector<double>> biases;
 public:
-    NeuralNetwork(char* fname);
+    NeuralNetwork(std::string fname);
 
     // The activation function for the nodes in the network
     double sigmoid(double x);
