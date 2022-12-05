@@ -39,7 +39,9 @@ int maxIndex(const std::vector<double>& v);
 
 std::ostream& operator<<(std::ostream& os, const Point& p);
 
-double sigmoid(double x);
+double   sigmoid(double x);
+
+double d_sigmoid(double x);
 
 std::vector<double> softmax(const std::vector<double>& v);
 

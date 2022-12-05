@@ -28,6 +28,8 @@ public:
     // @param desired_output one-hot category vector
     double calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
 
+    std::vector<double> errorGradient(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
+
     //update the nsu file with the learned data
     void updateNetwork();
 };

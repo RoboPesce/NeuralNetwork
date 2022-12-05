@@ -42,8 +42,9 @@ vector<double> NeuralNetwork::predict(const Point& p)
 
 // Calculates the cross-entropy loss between the predicted output
 // and the desired output for a given input.
+// @param predicted_output softmaxed output of neural network
 // @param desired_output an array of 0s where index of desired category is 1
- double NeuralNetwork::calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output) 
+double NeuralNetwork::calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output) 
 {
     //get the index of the desired category
     int true_ind = maxIndex(desired_output);
@@ -52,6 +53,16 @@ vector<double> NeuralNetwork::predict(const Point& p)
 
 //Calculates derivative of error using chain rule
 //dL/dz_i = p_i - t_i
+// @param predicted_output softmaxed output of neural network
+// @param desired_output an array of 0s where index of desired category is 1
+std::vector<double> NeuralNetwork::errorGradient(const std::vector<double>& predicted_output, const std::vector<double>& desired_output)
+{
+    vector<double> gradient = predicted_output;
+    int true_ind = maxIndex(desired_output);
+    gradient[true_ind] -= 1;
+    //other indices remain unchanged (p_i - 0)
+    return gradient;
+}
 
 void NeuralNetwork::updateNetwork()
 {

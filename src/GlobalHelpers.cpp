@@ -34,6 +34,14 @@ double sigmoid(double x)
     return 1.0 / (1.0 + exp(-x));
 }
 
+// Derivative of the activation function
+double d_sigmoid(double x) 
+{
+    double sig = sigmoid(x);
+    return sig * (1.0 - sig);
+}
+
+
 //converts raw probabilities to normalized probabilities
 std::vector<double> softmax(const std::vector<double>& v)
 {
