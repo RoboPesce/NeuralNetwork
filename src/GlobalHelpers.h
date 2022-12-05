@@ -10,13 +10,6 @@
 #include <string>
 #include <sstream>
 
-// A simple struct to represent a 2D point
-struct Point
-{
-    double x;
-    double y;
-};
-
 //returns a random double between 0 and 1
 class Randomizer
 {
@@ -36,8 +29,6 @@ public:
 double dot(const std::vector<double>& a, const std::vector<double>& b);
 
 int maxIndex(const std::vector<double>& v);
-
-std::ostream& operator<<(std::ostream& os, const Point& p);
 
 double   sigmoid(double x);
 

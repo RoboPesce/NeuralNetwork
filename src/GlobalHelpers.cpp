@@ -22,12 +22,6 @@ int maxIndex(const std::vector<double>& v)
     return maxind;
 }
 
-std::ostream& operator<<(std::ostream& os, const Point& p)
-{
-    os << '(' << p.x << ", " << p.y << ')';
-    return os;
-}
-
 //activation function
 double sigmoid(double x)
 {

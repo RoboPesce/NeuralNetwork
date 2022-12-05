@@ -1,7 +1,6 @@
 Make training functions
 Make training datasets
 Make dataset parser
-rewrite to work with vectors instead of points
 Automatic network initialization (for parser?)
 Extensions (Regularization, gaussian initialization, dropout, etc)
 Implement a layer weight vector? (Regularization gradient?)

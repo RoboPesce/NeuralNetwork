@@ -21,10 +21,11 @@ public:
 
     // The forward propagation function, which takes in a point
     // and returns the predicted label for the point
-    std::vector<double> predict(const Point& p);
+    std::vector<double> predict(const std::vector<double>& input);
 
     //Forward propagation which returns activations at each level as a 2D array
-    std::vector<std::vector<double>> predictGetActivations(const Point& p);
+    //Identical algorithm to predict(); use activations.back() to get predict() output
+    std::vector<std::vector<double>> predictGetActivations(const std::vector<double>& input);
 
     //calculates the error for a single datapoint
     // @param predicted_output softmaxed output of neural network
@@ -32,6 +33,8 @@ public:
     double calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
 
     std::vector<double> errorGradient(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
+
+    void backpropagation(const std::vector<double>& input, const std::vector<double>& output);
 
     //update the nsu file with the learned data
     void updateNetwork();

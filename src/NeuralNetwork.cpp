@@ -10,11 +10,10 @@ NeuralNetwork::NeuralNetwork(string fname) : nsu(fname)
 }
 
 // Predicts the output values for a given input point, using the current weights and biases
-vector<double> NeuralNetwork::predict(const Point& p)
+vector<double> NeuralNetwork::predict(const vector<double>& input)
 {
-    cout << "Attempting to predict " << p << endl;
-    // Initialize the input vector with the coordinates of the input point
-    vector<double> input = {p.x, p.y};
+    cout << "Attempting to predict " << input << endl;
+    vector<double> next_input = input;
 
     // Loop over the layers of the network
     for (size_t layer = 0; layer < weights.size(); layer++)
@@ -27,24 +26,25 @@ vector<double> NeuralNetwork::predict(const Point& p)
         // 3 apply the sigmoid function
         for (size_t i = 0; i < output.size(); i++)
         {
-            output[i] =  dot(input, weights[layer][i]);
+            output[i] =  dot(next_input, weights[layer][i]);
             output[i] += biases[layer][i];
             output[i] =  sigmoid(output[i]);
         }
         // Update the input for the next layer of the network
-        input = output;
+        next_input = output;
     }
 
-    cout << "Raw probabilities: " << input << endl;
+    cout << "Raw probabilities: " << next_input << endl;
     // Return the predicted output values
-    return input;
+    return next_input;
 }
 
-vector<vector<double>> NeuralNetwork::predictGetActivations(const Point& p)
+vector<vector<double>> NeuralNetwork::predictGetActivations(const vector<double>& input)
 {
-    // Initialize the input vector with the coordinates of the input point
-    vector<double> input = {p.x, p.y};
+    //vector to be returned
     vector<vector<double>> activations(weights.size());
+
+    vector<double> next_input = input;
 
     // Loop over the layers of the network
     for (size_t layer = 0; layer < weights.size(); layer++)
@@ -57,14 +57,14 @@ vector<vector<double>> NeuralNetwork::predictGetActivations(const Point& p)
         // 3 apply the sigmoid function
         for (size_t i = 0; i < output.size(); i++)
         {
-            output[i] =  dot(input, weights[layer][i]);
+            output[i] =  dot(next_input, weights[layer][i]);
             output[i] += biases[layer][i];
             output[i] =  sigmoid(output[i]);
         }
         //add the output (activations for this layer) to the activations vector
         activations[layer] = output;
         // Update the input for the next layer of the network
-        input = output;
+        next_input = output;
     }
     return activations;
 }
@@ -91,6 +91,16 @@ std::vector<double> NeuralNetwork::errorGradient(const std::vector<double>& pred
     gradient[true_ind] -= 1;
     //other indices remain unchanged (p_i - 0)
     return gradient;
+}
+
+//Backpropagation to update parameters based on a single example
+void NeuralNetwork::backpropagation(const vector<double>& input, const vector<double>& desired_output)
+{
+    vector<vector<double>> predicted_activations = predictGetActivations(input);
+    vector<double> softmax_output = softmax(predicted_activations.back());
+
+    double error = calculateError(softmax_output, desired_output);
+
 }
 
 void NeuralNetwork::updateNetwork()
