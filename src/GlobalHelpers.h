@@ -33,15 +33,15 @@ public:
 };
 
 // Calculates the dot product between two vectors
-double dot(std::vector<double>& a, std::vector<double>& b);
+double dot(const std::vector<double>& a, const std::vector<double>& b);
 
-int maxIndex(std::vector<double>& v);
+int maxIndex(const std::vector<double>& v);
 
 std::ostream& operator<<(std::ostream& os, const Point& p);
 
 double sigmoid(double x);
 
-std::vector<double> softmax(std::vector<double>& v);
+std::vector<double> softmax(const std::vector<double>& v);
 
 template <typename vtype>
 std::ostream& operator<<(std::ostream& os, const std::vector<vtype>& v)

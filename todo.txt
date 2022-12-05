@@ -2,6 +2,13 @@ Make training functions
 Make training datasets
 Make dataset parser
 rewrite to work with vectors instead of points
-Implement a layer weight vector?
+Automatic network initialization (for parser?)
+Extensions (Regularization, gaussian initialization, dropout, etc)
+Implement a layer weight vector? (Regularization gradient?)
+
+Questions
+-Best nonlinearization function?
+-Number of neurons/layers?
+-Don't apply nonlinearization to output layer?
 
 g++ -g -Wall src/main.cpp src/NeuralNetwork.cpp src/GlobalHelpers.cpp src/NSUParser.cpp -o neuralnet

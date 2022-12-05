@@ -1,6 +1,6 @@
 #include "GlobalHelpers.h"
 
-double dot(std::vector<double>& a, std::vector<double>& b)
+double dot(const std::vector<double>& a, const std::vector<double>& b)
 {
     double output = 0;
 
@@ -15,7 +15,7 @@ double dot(std::vector<double>& a, std::vector<double>& b)
     return output;
 }
 
-int maxIndex(std::vector<double>& v)
+int maxIndex(const std::vector<double>& v)
 {
     int maxind = 0;
     for(size_t i = 0; i < v.size(); i++) if(v[maxind] < v[i]) maxind = i;
@@ -35,7 +35,7 @@ double sigmoid(double x)
 }
 
 //converts raw probabilities to normalized probabilities
-std::vector<double> softmax(std::vector<double>& v)
+std::vector<double> softmax(const std::vector<double>& v)
 {
     std::vector<double> soft = v;
 

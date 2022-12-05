@@ -10,7 +10,7 @@ NeuralNetwork::NeuralNetwork(string fname) : nsu(fname)
 }
 
 // Predicts the output values for a given input point, using the current weights and biases
-vector<double> NeuralNetwork::predict(Point& p)
+vector<double> NeuralNetwork::predict(const Point& p)
 {
     cout << "Attempting to predict " << p << endl;
     // Initialize the input vector with the coordinates of the input point
@@ -45,11 +45,13 @@ vector<double> NeuralNetwork::predict(Point& p)
 // @param desired_output an array of 0s where index of desired category is 1
  double NeuralNetwork::calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output) 
 {
-    double error = 0.0;
-    for (size_t i = 0; i < predicted_output.size(); i++) 
-        error += -(desired_output[i] * log(predicted_output[i]) + (1 - desired_output[i]) * log(1 - predicted_output[i]));
-    return error;
+    //get the index of the desired category
+    int true_ind = maxIndex(desired_output);
+    return -log(predicted_output[true_ind]);
 }
+
+//Calculates derivative of error using chain rule
+//dL/dz_i = p_i - t_i
 
 void NeuralNetwork::updateNetwork()
 {

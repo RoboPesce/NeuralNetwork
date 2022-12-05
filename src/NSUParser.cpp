@@ -18,7 +18,7 @@ int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<doub
         cout << "Issue parsing network size." << endl;
         return 1;
     }
-    cout << "Network will have " << numlayers-- << " layers and take in input of size " << plsize << endl;
+    cout << "Network will have " << numlayers << " layers and take in input of size " << plsize << endl;
     //subtract 1 layer since we are not counting the input layer
     biases.resize(numlayers);
     weights.resize(numlayers);
@@ -28,7 +28,7 @@ int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<doub
         int lsize;
         file >> lsize;
 
-        cout << "Parsing layer " << layer+2 << " of size " << lsize << endl;
+        cout << "Parsing layer " << layer+1 << " of size " << lsize << endl;
 
         vector<double>& lbiases = biases[layer];
         vector<vector<double>>& lweights = weights[layer];
@@ -51,14 +51,14 @@ int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<doub
 
             if(ss.fail())
             {
-                cout << "Issue parsing weight array of layer " << i+2 << ", node " << i+1 << '.' << endl;
+                cout << "Issue parsing weight array of layer " << i+1 << ", node " << i+1 << '.' << endl;
                 return 1;
             }
         }
 
         if(file.fail())
         {
-            cout << "Issue parsing layer " << layer+2 << '.' << endl;
+            cout << "Issue parsing layer " << layer+1 << '.' << endl;
             return 1;
         }
         //set the previous layer size to this layer's size for the next layer

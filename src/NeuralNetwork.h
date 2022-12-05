@@ -21,8 +21,11 @@ public:
 
     // The forward propagation function, which takes in a point
     // and returns the predicted label (0 or 1) for the point
-    std::vector<double> predict(Point& point);
+    std::vector<double> predict(const Point& point);
 
+    //calculates the error for a single datapoint
+    // @param predicted_output softmaxed output of neural network
+    // @param desired_output one-hot category vector
     double calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
 
     //update the nsu file with the learned data

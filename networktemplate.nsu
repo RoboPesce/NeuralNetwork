@@ -1,5 +1,5 @@
 int_inputsize
-int_numlayers // >=1
+int_numlayers // >=1, not including input
 
 //parameters for hidden layers
 //if the size of any node's weights doesn't agree
@@ -19,7 +19,7 @@ double_node1bias double[]_node1weights[prevnode1weight prevnode2weight...] ... d
 //Example:
 
 2
-3
+2
 
 3
 0.1 [0.1 0.9] 0.1 [0.5 0.5] 0.3 [0.2 0.3]
