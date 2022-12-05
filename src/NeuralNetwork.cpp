@@ -35,9 +35,38 @@ vector<double> NeuralNetwork::predict(const Point& p)
         input = output;
     }
 
-    cout << "Probabilities: " << input << endl;
+    cout << "Raw probabilities: " << input << endl;
     // Return the predicted output values
     return input;
+}
+
+vector<vector<double>> NeuralNetwork::predictGetActivations(const Point& p)
+{
+    // Initialize the input vector with the coordinates of the input point
+    vector<double> input = {p.x, p.y};
+    vector<vector<double>> activations(weights.size());
+
+    // Loop over the layers of the network
+    for (size_t layer = 0; layer < weights.size(); layer++)
+    {
+        // The output vector will be the number of nodes in the layer
+        vector<double> output(biases[layer].size());
+
+        // 1 sum the weighted values of inputs
+        // 2 add bias
+        // 3 apply the sigmoid function
+        for (size_t i = 0; i < output.size(); i++)
+        {
+            output[i] =  dot(input, weights[layer][i]);
+            output[i] += biases[layer][i];
+            output[i] =  sigmoid(output[i]);
+        }
+        //add the output (activations for this layer) to the activations vector
+        activations[layer] = output;
+        // Update the input for the next layer of the network
+        input = output;
+    }
+    return activations;
 }
 
 // Calculates the cross-entropy loss between the predicted output

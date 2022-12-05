@@ -20,8 +20,11 @@ public:
     NeuralNetwork(std::string fname);
 
     // The forward propagation function, which takes in a point
-    // and returns the predicted label (0 or 1) for the point
-    std::vector<double> predict(const Point& point);
+    // and returns the predicted label for the point
+    std::vector<double> predict(const Point& p);
+
+    //Forward propagation which returns activations at each level as a 2D array
+    std::vector<std::vector<double>> predictGetActivations(const Point& p);
 
     //calculates the error for a single datapoint
     // @param predicted_output softmaxed output of neural network
