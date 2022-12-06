@@ -29,7 +29,7 @@ double sigmoid(double x)
 }
 
 // Derivative of the activation function
-double d_sigmoid(double x) 
+double dSigmoid(double x) 
 {
     double sig = sigmoid(x);
     return sig * (1.0 - sig);

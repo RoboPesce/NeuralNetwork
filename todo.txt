@@ -4,6 +4,7 @@ Make training datasets
 Make dataset parser
 Automatic network initialization (for parser?)
 Extensions (Regularization, gaussian initialization, dropout, etc)
+Consistent notation in comments/documentation
 Implement a layer weight vector? (Regularization gradient?)
 
 Questions

@@ -18,8 +18,6 @@ The neural network is an n-partite graph in a layered heirarchy. Each layer is f
 
 The final output is then ran through a softmax function, which allows the output vector to be interpreted roughly as the probabilities of the input falling into each index category.
 
-This is the simplest type of neural network, called a feedforward network. 
-
 
 
 Training:
