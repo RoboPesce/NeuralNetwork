@@ -33,8 +33,6 @@ int main()
     */
     //nn.updateNetwork();
 
-    cout << "\nActivations: " << nn.predictGetActivations(point) << endl;
-
     return 0;
 }
 

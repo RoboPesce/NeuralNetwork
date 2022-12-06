@@ -10,7 +10,7 @@
 class NeuralNetwork
 {
 private:
-    //for parsing NSU file
+    //for parsing and writing NSU file
     NSUParser nsu;
     // Vector of weights, where each element is a vector of weights for a layer of the network
     std::vector<std::vector<std::vector<double>>> weights;
@@ -23,18 +23,22 @@ public:
     // and returns the predicted label for the point
     std::vector<double> predict(const std::vector<double>& input);
 
-    //Forward propagation which returns activations at each level as a 2D array
-    //Identical algorithm to predict(); use activations.back() to get predict() output
-    std::vector<std::vector<double>> predictGetActivations(const std::vector<double>& input);
+    /*
+     Forward propagation which returns the preactivation (weighted) outputs at each level 
+     as a 2D array
+     Identical algorithm to predict(); use activations.back() and apply activation to each
+     output to get predict() output
+    */
+    std::vector<std::vector<double>> predictGetWeightedOutputs(const std::vector<double>& input);
 
     //calculates the error for a single datapoint
     // @param predicted_output softmaxed output of neural network
     // @param desired_output one-hot category vector
-    double calculateError(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
+    static double calculateLoss(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
 
-    std::vector<double> errorGradient(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
+    static std::vector<double> lossGradient(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
 
-    void backpropagation(const std::vector<double>& input, const std::vector<double>& output);
+    void backpropagation(const std::vector<double>& input, const std::vector<double>& output, double learning_rate);
 
     //update the nsu file with the learned data
     void updateNetwork();
