@@ -108,8 +108,6 @@ void NeuralNetwork::backpropagation(const vector<double>& input, const vector<do
     for(size_t i = 0; i < softmax_output.size(); i++) softmax_output[i] = sigmoid(softmax_output[i]);
     softmax_output = softmax(softmax_output);
 
-    //get error, might be unecessary
-    double error = calculateLoss(softmax_output, desired_output);
     //Vector of partial derivatives of output activations with respect to loss
     //dL/ds_i, where s = sigmoid of ith neuron
     vector<double> activation_gradient = lossGradient(softmax_output, desired_output);
@@ -129,9 +127,9 @@ void NeuralNetwork::backpropagation(const vector<double>& input, const vector<do
     dL/ds_j must be a sum over dL/ds_i * dSigmoid(a_i) * w_ij for all neurons i in the layer
      so these will be kept track of in a vector that will be assigned to activationGradient later
     */
-   //start loop at last layer
-   vector<double> next_activation_gradient;
-   for(size_t layer = weights.size()-1; layer >= 0; layer++)
+    //start loop at last layer
+    vector<double> next_activation_gradient;
+    for(size_t layer = weights.size()-1; layer >= 0; layer++)
     {
         //Store gradient of next layer's dL/ds_j. Its size is determined by 
         //the number of weights any neuron on this layer has

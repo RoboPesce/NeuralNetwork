@@ -27,3 +27,15 @@ Under construction
 Given some input, your output is essentially a function of all the parameters (weights and biases) of the neural network. Let's say that the function P for some input y is f_y(w1, w2, ..., b1, b2, ...), which is the softmaxed prediction. We then apply one more operation (the loss function, which in this case is cross-entropy loss). Let's call that L_y(w1, w2, ..., b1, b2, ...). We want to minimize this loss function, which roughly means taking its gradient and finding the values of parameters that set it closest to 0. But since it's pretty hard to just do that directly, we use an iterated learning process where we take small steps based on the computed derivatives until the loss converges to some value, which is hopefully the minimum. The size of the steps is called the learning rate.
 
 In order to calculate the derivatives, we need to use the chain rule for multivariable equations. First, we calculate the partial derivative of the loss with respect to the outputs. Then, for each neuron in the last layer, we find the partial derivatives of the outputs with respect to the parameters of the neurons and multiply it with the loss derivatives. We update the parameters, then send the derivatives back to compute the next layer's derivatives -- hence backpropagation.
+
+
+
+Credit to ChatGPT for setting up the initial structure of the neural network class! It was a huge help in answering my questions and showing how neural networks implement the various algorithms you see. Further credit to the following links for having excellent information about neural networks that I used to write the code:
+
+https://cs231n.github.io/
+
+https://www.pinecone.io/learn/cross-entropy-loss/
+
+http://neuralnetworksanddeeplearning.com/chap2.html
+
+https://ai.stackexchange.com/questions/11667/is-back-propagation-applied-for-each-data-point-or-for-a-batch-of-data-points
