@@ -2,7 +2,7 @@
 
 using namespace std;
 
-NSUParser::NSUParser(string fname) : file(fname), fpath(fname) {}
+NSUParser::NSUParser(string fname) : file(fname, ios::in), fpath(fname) {}
 
 int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<double>>& biases)
 {
@@ -39,11 +39,14 @@ int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<doub
         for(int i = 0; i < lsize; i++)
         {
             file >> lbiases[i];
-
             //parse out weight array
-            char c = ' ';
-            while(c!='[') c = file.get();
-
+            file.ignore(numeric_limits<streamsize>::max(), '[');
+            if(file.eof()) 
+            {
+                cout << "Issue parsing start of weight array of layer " << i+1 << ", node " << i+1 << '.' << endl;
+                return 1;
+            }
+            
             string array;
             getline(file, array, ']');
             stringstream ss(array);
@@ -81,7 +84,7 @@ void NSUParser::write(vector<vector<vector<double>>>& weights, vector<vector<dou
     file.open(fpath, ios::out | ios::trunc);
 
     //append input size and layer count
-    file << weights[0][0].size() << '\n' << biases.size()+1 << "\n\n";
+    file << weights[0][0].size() << '\n' << biases.size() << "\n\n";
     
     for(size_t layer = 0; layer < biases.size(); layer++)
     {

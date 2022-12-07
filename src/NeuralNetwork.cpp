@@ -180,8 +180,9 @@ std::ostream& operator<<(std::ostream& os, const NeuralNetwork& nn)
             {
                 os << nn.weights[layer][node][pnode] << ' ';
             }
-            os << "] " << std::endl;
+            os << "] ";
         }
+        os << std::endl;
     }
     return os;
 }

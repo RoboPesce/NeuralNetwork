@@ -7,30 +7,14 @@ int main()
     Randomizer random;
 
     // Create a neural network
-    NeuralNetwork nn("network1.nsu");
-
-    // Create a point
-    vector<double> point(2);
-    point[0] = random.randDouble();
-    point[1] = random.randDouble();
-
-    // Predict the label for the point using the neural network
-    vector<double> prediction = softmax(nn.predict(point));
-    int label = maxIndex(prediction);
-
-    // Print the predicted label
-    cout << "Probabilities: " << prediction << endl;
-    cout << "\nPredicted label for point " << point << ": " << label << endl;
-
-    
-    cout << "Before training:" << endl;
-    cout << nn << endl;
+    NeuralNetwork nn("testnet.nsu");
 
     //Create some random training data
-    //Assume that the label 0 -> x<y and label 1 -> x>=y
-    vector<vector<double>> training_data(10);
-    vector<vector<double>> desired_outputs(10);
-    for(int i = 0; i < 10; i++)
+    //Assume that the label 0 -> x^2<y and label 1 -> x^2>=y
+    int train_size = 50;
+    vector<vector<double>> training_data(train_size);
+    vector<vector<double>> desired_outputs(train_size);
+    for(int i = 0; i < train_size; i++)
     {
         training_data[i] = vector<double>(2);
         training_data[i][0] = random.randDouble();
@@ -40,23 +24,59 @@ int main()
         desired_outputs[i][1] = training_data[i][0] >= training_data[i][1];
     }
     cout << "Training data: " << training_data << endl;
-    cout << "Desired outputs: " << desired_outputs << '\n' << endl;
+    cout << "Desired outputs: " << desired_outputs << endl;
 
     cout << "Network before:" << endl;
     cout << nn << endl;
 
+    vector<double> p(2);
+    for(double i = 0; i < 20; i++)
+    {
+        for(double j = 0; j < 20; j++)
+        {
+            p[0] = i/20;
+            p[1] = j/20;
+            cout << maxIndex(softmax(nn.predict(p)));
+        }
+        cout << endl;
+    }
+
+    /*
     cout << "Losses before: " << endl;
-    for(int i = 0; i < 10; i++) 
-        cout << "Loss for point " << training_data[i] << ": " << nn.calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
+    for(int i = 0; i < train_size; i++) 
+        cout << "Point " << training_data[i] << ": " << nn.calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
+    */
 
-    double learning_rate = .5;
-    for(int i = 0; i < 10; i++) nn.backpropagation(training_data[i], desired_outputs[i], learning_rate);
+    double learning_rate = 1;
+    for(int i = 0; i < train_size; i++) nn.backpropagation(training_data[i], desired_outputs[i], learning_rate);
 
-    cout << "\nNetwork after: \n" << nn << '\n' << endl;
+    cout << "\nNetwork after: \n" << nn << endl;
 
+    cout << "desired output:" << endl;
+    for(double i = 0; i < 20; i++) 
+    { 
+        for(double j = 0; j < 20; j++) cout << (i >= j);
+        cout << endl;
+    }
+    cout << "actual output:" << endl;
+    for(double i = 0; i < 20; i++)
+    {
+        for(double j = 0; j < 20; j++)
+        {
+            p[0] = i/20;
+            p[1] = j/20;
+            cout << maxIndex(softmax(nn.predict(p)));
+        }
+        cout << endl;
+    }
+
+    /*
     cout << "Losses after: " << endl;
-    for(int i = 0; i < 10; i++) 
-        cout << "Loss for point " << training_data[i] << ": " << nn.calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
+    for(int i = 0; i < train_size; i++) 
+        cout << "Point " << training_data[i] << ": " << nn.calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
+    */
+
+    nn.updateNetwork();
 
     return 0;
 }
