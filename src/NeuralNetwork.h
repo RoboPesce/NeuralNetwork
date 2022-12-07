@@ -42,6 +42,8 @@ public:
 
     //update the nsu file with the learned data
     void updateNetwork();
+
+    friend std::ostream& operator<<(std::ostream& os, const NeuralNetwork& nn);
 };
 
 #endif

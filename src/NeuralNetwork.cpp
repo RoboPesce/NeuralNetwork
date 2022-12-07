@@ -12,7 +12,7 @@ NeuralNetwork::NeuralNetwork(string fname) : nsu(fname)
 // Predicts the output values for a given input point, using the current weights and biases
 vector<double> NeuralNetwork::predict(const vector<double>& input)
 {
-    cout << "Attempting to predict " << input << endl;
+    //cout << "Attempting to predict " << input << endl;
     vector<double> next_input = input;
 
     // Loop over the layers of the network
@@ -34,7 +34,7 @@ vector<double> NeuralNetwork::predict(const vector<double>& input)
         next_input = output;
     }
 
-    cout << "Raw probabilities: " << next_input << endl;
+    //cout << "Raw probabilities: " << next_input << endl;
     // Return the predicted output values
     return next_input;
 }
@@ -145,7 +145,7 @@ void NeuralNetwork::backpropagation(const vector<double>& input, const vector<do
             biases[layer][node] -= dL_db * learning_rate;
             //now loop through previous layer's neurons in order to update weights and calculate next activation gradient
             //note that we must use the input as s_j for the final layer
-            for(int j_node = 0; j_node < weights[layer][node].size(); j_node++)
+            for(size_t j_node = 0; j_node < weights[layer][node].size(); j_node++)
             {
                 double s_j;
                 if(layer == 0) s_j = input[j_node];
@@ -167,4 +167,21 @@ void NeuralNetwork::backpropagation(const vector<double>& input, const vector<do
 void NeuralNetwork::updateNetwork()
 {
     nsu.write(weights, biases);
+}
+
+std::ostream& operator<<(std::ostream& os, const NeuralNetwork& nn)
+{
+    for(size_t layer = 0; layer < nn.weights.size(); layer++)
+    {
+        for(size_t node = 0; node < nn.weights[layer].size(); node++)
+        {
+            os << nn.biases[layer][node] << " [ ";
+            for (size_t pnode = 0; pnode < nn.weights[layer][node].size(); pnode++)
+            {
+                os << nn.weights[layer][node][pnode] << ' ';
+            }
+            os << "] " << std::endl;
+        }
+    }
+    return os;
 }
