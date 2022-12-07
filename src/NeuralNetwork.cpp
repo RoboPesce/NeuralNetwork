@@ -129,7 +129,7 @@ void NeuralNetwork::backpropagation(const vector<double>& input, const vector<do
     */
     //start loop at last layer
     vector<double> next_activation_gradient;
-    for(size_t layer = weights.size()-1; layer >= 0; layer++)
+    for(int layer = weights.size()-1; layer >= 0; layer--)
     {
         //Store gradient of next layer's dL/ds_j. Its size is determined by 
         //the number of weights any neuron on this layer has

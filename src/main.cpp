@@ -43,7 +43,7 @@ int main()
     cout << "Desired outputs: " << desired_outputs << '\n' << endl;
 
     cout << "Network before:" << endl;
-    cout << nn << '\n' << endl;
+    cout << nn << endl;
 
     cout << "Losses before: " << endl;
     for(int i = 0; i < 10; i++) 
