@@ -30,12 +30,12 @@ int main()
     cout << nn << endl;
 
     vector<double> p(2);
-    for(double i = 0; i < 20; i++)
+    for(double i = 0; i < 10; i++)
     {
-        for(double j = 0; j < 20; j++)
+        for(double j = 0; j < 10; j++)
         {
-            p[0] = i/20;
-            p[1] = j/20;
+            p[0] = i/10;
+            p[1] = j/10;
             cout << maxIndex(softmax(nn.predict(p)));
         }
         cout << endl;
@@ -47,24 +47,25 @@ int main()
         cout << "Point " << training_data[i] << ": " << nn.calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
     */
 
-    double learning_rate = 1;
+    double learning_rate = .7;
     for(int i = 0; i < train_size; i++) nn.backpropagation(training_data[i], desired_outputs[i], learning_rate);
 
     cout << "\nNetwork after: \n" << nn << endl;
 
+    //sample 100 points in [0, 1]^2
     cout << "desired output:" << endl;
-    for(double i = 0; i < 20; i++) 
+    for(double i = 0; i < 10; i++) 
     { 
-        for(double j = 0; j < 20; j++) cout << (i >= j);
+        for(double j = 0; j < 10; j++) cout << (i/10 >= j/10);
         cout << endl;
     }
     cout << "actual output:" << endl;
-    for(double i = 0; i < 20; i++)
+    for(double i = 0; i < 10; i++)
     {
-        for(double j = 0; j < 20; j++)
+        for(double j = 0; j < 10; j++)
         {
-            p[0] = i/20;
-            p[1] = j/20;
+            p[0] = i/10;
+            p[1] = j/10;
             cout << maxIndex(softmax(nn.predict(p)));
         }
         cout << endl;

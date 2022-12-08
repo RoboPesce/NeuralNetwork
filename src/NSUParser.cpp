@@ -84,10 +84,11 @@ void NSUParser::write(vector<vector<vector<double>>>& weights, vector<vector<dou
     file.open(fpath, ios::out | ios::trunc);
 
     //append input size and layer count
-    file << weights[0][0].size() << '\n' << biases.size() << "\n\n";
+    file << weights[0][0].size() << '\n' << biases.size();
     
     for(size_t layer = 0; layer < biases.size(); layer++)
     {
+        file << "\n\n";
         //append layer size
         file << biases[layer].size() << '\n';
         for(size_t node = 0; node < biases[layer].size(); node++)
@@ -98,7 +99,6 @@ void NSUParser::write(vector<vector<vector<double>>>& weights, vector<vector<dou
             for(size_t pnode = 0; pnode < weights[layer][node].size(); pnode++) file << weights[layer][node][pnode] << ' ';
             file << "] ";
         }
-        file << "\n\n";
     }
     file << endl;
     file.close();

@@ -1,4 +1,3 @@
-Make training functions
 Include learning rate in nsu
 Make training datasets
 Make dataset parser
