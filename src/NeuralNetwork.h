@@ -4,9 +4,7 @@
 #include "GlobalHelpers.h"
 #include "NSUParser.h"
 
-// A simple class to represent a neural network
-// with two input nodes, one hidden layer with two nodes,
-// and one output node.
+// A neural network with variable layers. Can read a network from a .nsu file.
 class NeuralNetwork
 {
 private:

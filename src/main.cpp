@@ -58,8 +58,14 @@ int main(int argc, char** argv)
     avg_loss /= 100;
     cout << "Average loss: " << avg_loss << endl;
 
+    cout << "Entering training\n" << endl;
     double learning_rate = atof(argv[2]);
-    for(int i = 0; i < train_size; i++) nn.backpropagation(training_data[i], desired_outputs[i], learning_rate);
+    for(int i = 0; i < train_size; i++) 
+    {
+        cout << "loss before: " << NeuralNetwork::calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;;
+        nn.backpropagation(training_data[i], desired_outputs[i], learning_rate);
+        cout << "loss after: " << NeuralNetwork::calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
+    }
 
     cout << "\nNetwork after: \n" << nn << endl;
 
