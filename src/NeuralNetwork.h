@@ -16,6 +16,8 @@ private:
     std::vector<std::vector<std::vector<double>>> weights;
     // Vector of biases, where each element is a vector of biases for a layer of the network
     std::vector<std::vector<double>> biases;
+
+    bool failed=false;
 public:
     NeuralNetwork(std::string fname);
 
@@ -44,6 +46,8 @@ public:
     void updateNetwork();
 
     friend std::ostream& operator<<(std::ostream& os, const NeuralNetwork& nn);
+
+    operator bool() const;
 };
 
 #endif

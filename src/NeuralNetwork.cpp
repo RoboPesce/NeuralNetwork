@@ -6,7 +6,11 @@ double RandDouble();
 
 NeuralNetwork::NeuralNetwork(string fname) : nsu(fname)
 {
-    if(nsu.parse(weights, biases)) cout << "File invalid." << endl;
+    if(nsu.parse(weights, biases)) 
+    {
+        cout << "File invalid." << endl;
+        failed = true;
+    }
 }
 
 // Predicts the output values for a given input point, using the current weights and biases
@@ -185,4 +189,9 @@ std::ostream& operator<<(std::ostream& os, const NeuralNetwork& nn)
         os << std::endl;
     }
     return os;
+}
+
+NeuralNetwork::operator bool() const
+{
+    return failed;
 }

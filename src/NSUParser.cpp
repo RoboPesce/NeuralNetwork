@@ -43,7 +43,7 @@ int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<doub
             file.ignore(numeric_limits<streamsize>::max(), '[');
             if(file.eof()) 
             {
-                cout << "Issue parsing start of weight array of layer " << i+1 << ", node " << i+1 << '.' << endl;
+                cout << "Issue parsing start of weight array of layer " << layer+1 << ", node " << i+1 << '.' << endl;
                 return 1;
             }
             
@@ -54,7 +54,7 @@ int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<doub
 
             if(ss.fail())
             {
-                cout << "Issue parsing weight array of layer " << i+1 << ", node " << i+1 << '.' << endl;
+                cout << "Issue parsing weight array of layer " << layer+1 << ", node " << i+1 << '.' << endl;
                 return 1;
             }
         }
@@ -100,6 +100,8 @@ void NSUParser::write(vector<vector<vector<double>>>& weights, vector<vector<dou
     }
     file << endl;
     file.close();
+
+    cout << "Overwrote network." << endl;
 }
 
 NSUParser::~NSUParser()

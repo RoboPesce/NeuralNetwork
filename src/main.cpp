@@ -14,6 +14,7 @@ int main(int argc, char** argv)
 
     // Create a neural network
     NeuralNetwork nn("testnet.nsu");
+    if(nn) return 1;
 
     /* 
     Create some random training data
@@ -34,7 +35,7 @@ int main(int argc, char** argv)
     cout << "Training data: " << training_data << endl;
     cout << "Desired outputs: " << desired_outputs << endl;
 
-    cout << "Network before:" << endl;
+    cout << "\nNetwork before:" << endl;
     cout << nn << endl;
 
     vector<double> p(2);
@@ -48,15 +49,14 @@ int main(int argc, char** argv)
             vector<double> prediction = softmax(nn.predict(p));
             cout << maxIndex(prediction);
             //turn p into the expected output
-            p[0] = (0.5 * sin(i * 2 * M_PI) + 0.5 >= j);
-            p[1] = (0.5 * sin(i * 2 * M_PI) + 0.5 < j);
+            p[0] = (0.5 * sin(i * 2 * M_PI) + 0.5 >  j);
+            p[1] = (0.5 * sin(i * 2 * M_PI) + 0.5 <= j);
             avg_loss += nn.calculateLoss(prediction, p);
         }
         cout << endl;
     }
     avg_loss /= 100;
     cout << "Average loss: " << avg_loss << endl;
-    avg_loss = 0;
 
     double learning_rate = atof(argv[2]);
     for(int i = 0; i < train_size; i++) nn.backpropagation(training_data[i], desired_outputs[i], learning_rate);
@@ -70,7 +70,9 @@ int main(int argc, char** argv)
         for(double j = 0; j < 1; j+=.1) cout << (0.5 * sin(i * 2 * M_PI) + 0.5 >= j);
         cout << endl;
     }
-    cout << "actual output:" << endl;
+    
+    avg_loss = 0;
+    cout << "\nactual output:" << endl;
     for(double i = 0; i < 1; i+=.1)
     {
         for(double j = 0; j < 1; j+=.1)
@@ -80,14 +82,14 @@ int main(int argc, char** argv)
             vector<double> prediction = softmax(nn.predict(p));
             cout << maxIndex(prediction);
             //turn p into the expected output
-            p[0] = (0.5 * sin(i * 2 * M_PI) + 0.5 >= j);
-            p[1] = (0.5 * sin(i * 2 * M_PI) + 0.5 < j);
+            p[0] = (0.5 * sin(i * 2 * M_PI) + 0.5 >  j);
+            p[1] = (0.5 * sin(i * 2 * M_PI) + 0.5 <= j);
             avg_loss += nn.calculateLoss(prediction, p);
         }
         cout << endl;
     }
     avg_loss /= 100;
-    cout << "Average loss: " << avg_loss << endl;
+    cout << "Average loss: " << avg_loss << '\n' << endl;
 
     if(argv[3][0] == '1') nn.updateNetwork();
 
