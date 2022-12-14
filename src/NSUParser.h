@@ -18,7 +18,6 @@ public:
 private:
     std::fstream file;
     std::string fpath;
-    bool hasParsed=false;
 };
 
 #endif

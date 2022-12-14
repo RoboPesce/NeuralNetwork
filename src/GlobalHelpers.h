@@ -1,11 +1,12 @@
 #ifndef GLOBALHELPERS_H
 #define GLOBALHELPERS_H
 
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include <ctime>
 #include <random>
 #include <vector>
 #include <iostream>
-#include <cmath>
 #include <fstream>
 #include <string>
 #include <sstream>

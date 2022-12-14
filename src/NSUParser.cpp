@@ -71,14 +71,12 @@ int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<doub
     cout << "Biases: " << biases << endl;
     cout << "Weights: " << weights << endl;
     cout << "Succeeded parsing file.\n" << endl;
-    hasParsed = true;
 
     return 0;
 }
 
 void NSUParser::write(vector<vector<vector<double>>>& weights, vector<vector<double>>& biases)
 {
-    if(!hasParsed) return;
     file.close();
     //clear contents and write to file
     file.open(fpath, ios::out | ios::trunc);
