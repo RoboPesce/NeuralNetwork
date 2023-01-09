@@ -97,6 +97,7 @@ int main(int argc, char** argv)
     avg_loss /= 100;
     cout << "Average loss: " << avg_loss << '\n' << endl;
 
+    //only update if user wants
     if(argv[3][0] == '1') nn.updateNetwork();
 
     return 0;
