@@ -61,9 +61,13 @@ int main(int argc, char** argv)
     for(int i = 0; i < train_size; i++) 
     {
         cout << "for point " << training_data[i] << " (" << desired_outputs[i] << ')' << endl;
-        cout << "loss before: " << NeuralNetwork::calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
+        vector<double> prediction = nn.predict(training_data[i]);
+        cout << "prediction before: " << prediction << endl;
+        cout << "loss before: " << NeuralNetwork::calculateLoss(prediction, desired_outputs[i]) << endl;
         nn.backpropagation(training_data[i], desired_outputs[i], learning_rate);
-        cout << "loss after: " << NeuralNetwork::calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
+        prediction = nn.predict(training_data[i]);
+        cout << "prediction after: " << prediction << endl;
+        cout << "loss after: " << NeuralNetwork::calculateLoss(prediction, desired_outputs[i]) << endl;
     }
 
     cout << "\nNetwork after: \n" << nn << endl;
