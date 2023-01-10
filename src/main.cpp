@@ -32,8 +32,6 @@ int main(int argc, char** argv)
         desired_outputs[i][0] = 0.5 * sin(training_data[i][0] * 2 * M_PI) + 0.5 <  training_data[i][1]; //casting bool to double sets it to 0/1
         desired_outputs[i][1] = 0.5 * sin(training_data[i][0] * 2 * M_PI) + 0.5 >= training_data[i][1];
     }
-    cout << "Training data: " << training_data << endl;
-    cout << "Desired outputs: " << desired_outputs << endl;
 
     cout << "\nNetwork before:" << endl;
     cout << nn << endl;
@@ -62,7 +60,8 @@ int main(int argc, char** argv)
     double learning_rate = atof(argv[2]);
     for(int i = 0; i < train_size; i++) 
     {
-        cout << "loss before: " << NeuralNetwork::calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;;
+        cout << "for point " << training_data[i] << " (" << desired_outputs[i] << ')' << endl;
+        cout << "loss before: " << NeuralNetwork::calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
         nn.backpropagation(training_data[i], desired_outputs[i], learning_rate);
         cout << "loss after: " << NeuralNetwork::calculateLoss(nn.predict(training_data[i]), desired_outputs[i]) << endl;
     }

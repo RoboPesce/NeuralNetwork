@@ -38,9 +38,8 @@ vector<double> NeuralNetwork::predict(const vector<double>& input)
         next_input = output;
     }
 
-    //cout << "Raw probabilities: " << next_input << endl;
     // Return the predicted output values
-    return next_input;
+    return softmax(next_input);
 }
 
 vector<vector<double>> NeuralNetwork::predictGetWeightedOutputs(const vector<double>& input)
@@ -78,7 +77,7 @@ vector<vector<double>> NeuralNetwork::predictGetWeightedOutputs(const vector<dou
  Calculates the cross-entropy loss between the predicted output
  and the desired output for a given input.
  @param predicted_output softmaxed output of neural network
- param desired_output an array of 0s where index of desired category is 1
+ param desired_output an array of 0s where entry of desired category index is 1
 */
 double NeuralNetwork::calculateLoss(const std::vector<double>& predicted_output, const std::vector<double>& desired_output) 
 {
