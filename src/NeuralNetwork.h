@@ -16,6 +16,7 @@ private:
     std::vector<std::vector<double>> biases;
 
     bool failed=false;
+    
 public:
     NeuralNetwork(std::string fname);
 

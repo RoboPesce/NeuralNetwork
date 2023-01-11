@@ -28,14 +28,15 @@ vector<double> NeuralNetwork::predict(const vector<double>& input)
         // 1 sum the weighted values of inputs
         // 2 add bias
         // 3 apply the sigmoid function
-        for (size_t i = 0; i < output.size(); i++)
+        for (size_t node = 0; node < output.size(); node++)
         {
-            output[i] =  dot(next_input, weights[layer][i]);
-            output[i] += biases[layer][i];
-            output[i] =  sigmoid(output[i]);
+            output[node] =  dot(next_input, weights[layer][node]);
+            output[node] += biases[layer][node];
+            output[node] =  sigmoid(output[node]);
         }
         // Update the input for the next layer of the network
         next_input = output;
+        //cout << "output for layer " << layer << ": " << output << endl;
     }
 
     // Return the predicted output values
