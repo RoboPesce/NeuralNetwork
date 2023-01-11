@@ -5,7 +5,8 @@ Implements a basic feedforward network.
 
 compile in terminal:
 g++ -g -Wall src/main.cpp src/NeuralNetwork.cpp src/GlobalHelpers.cpp src/NSUParser.cpp -o neuralnet
-./neuralnet
+
+./neuralnet > output.txt
 
 
 How it works:

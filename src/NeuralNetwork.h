@@ -20,6 +20,11 @@ private:
 public:
     NeuralNetwork(std::string fname);
 
+    //activation function
+    static double  activation(double x);
+
+    static double dActivation(double x);
+
     // The forward propagation function, which takes in a point
     // and returns the predicted label for the point
     std::vector<double> predict(const std::vector<double>& input);

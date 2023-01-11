@@ -1,5 +1,7 @@
 #include "NeuralNetwork.h"
 
+#define alpha 0.01
+
 using namespace std;
 
 double RandDouble();
@@ -27,12 +29,12 @@ vector<double> NeuralNetwork::predict(const vector<double>& input)
 
         // 1 sum the weighted values of inputs
         // 2 add bias
-        // 3 apply the sigmoid function
+        // 3 apply the activation function
         for (size_t node = 0; node < output.size(); node++)
         {
             output[node] =  dot(next_input, weights[layer][node]);
             output[node] += biases[layer][node];
-            output[node] =  sigmoid(output[node]);
+            output[node] =  activation(output[node]);
         }
         // Update the input for the next layer of the network
         next_input = output;
@@ -58,7 +60,7 @@ vector<vector<double>> NeuralNetwork::predictGetWeightedOutputs(const vector<dou
 
         // 1 sum the weighted values of inputs
         // 2 add bias
-        // 3 apply the sigmoid function (after adding output to array)
+        // 3 apply the activation function (after adding output to array)
         for (size_t i = 0; i < output.size(); i++)
         {
             output[i] =  dot(next_input, weights[layer][i]);
@@ -66,8 +68,8 @@ vector<vector<double>> NeuralNetwork::predictGetWeightedOutputs(const vector<dou
         }
         //add the output (activations for this layer) to the activations vector
         outputs[layer] = output;
-        //apply sigmoid
-        for (size_t i = 0; i < output.size(); i++) output[i] =  sigmoid(output[i]);
+        //apply activation
+        for (size_t i = 0; i < output.size(); i++) output[i] = activation(output[i]);
         // Update the input for the next layer of the network
         next_input = output;
     }
@@ -109,11 +111,11 @@ void NeuralNetwork::backpropagation(const vector<double>& input, const vector<do
     vector<vector<double>> weighted_outputs = predictGetWeightedOutputs(input);
     //calculate softmax of output layer
     vector<double> softmax_output = weighted_outputs.back();
-    for(size_t i = 0; i < softmax_output.size(); i++) softmax_output[i] = sigmoid(softmax_output[i]);
+    for(size_t i = 0; i < softmax_output.size(); i++) softmax_output[i] = activation(softmax_output[i]);
     softmax_output = softmax(softmax_output);
 
     //Vector of partial derivatives of output activations with respect to loss
-    //dL/ds_i, where s = sigmoid of ith neuron
+    //dL/ds_i, where s = activation of ith neuron
     vector<double> activation_gradient = lossGradient(softmax_output, desired_output);
     
     /*
@@ -122,13 +124,13 @@ void NeuralNetwork::backpropagation(const vector<double>& input, const vector<do
     2. Use partial derivatives to update parameters based on the learning rate
     3. update activationGradient to contain next layer's dL/ds_j
      Call the weighted output of neuron i (before activation) a_i
-     Note that dL/da_i = dL/ds_i * ds_i/da_i, where ds_i/da_i = dSigmoid(a_i)
+     Note that dL/da_i = dL/ds_i * ds_i/da_i, where ds_i/da_i = dActivation(a_i)
      Also a_i derivatives with respect to parameters are simply linear
-     Since s_i = sigmoid(a_i) ds_i/any parameter is dL/s_i * dSigmoid(a_i) * the parameter's coefficient
+     Since s_i = activation(a_i) ds_i/any parameter is dL/s_i * dActivation(a_i) * the parameter's coefficient
      Partial derivatives are calculated as follows:
-    dL/dw_ij = dL/ds_i * dSigmoid(a_i) * s_j
-    dL/db_i = dL/ds_i * dSigmoid(a_i)          (coefficient of 1)
-    dL/ds_j must be a sum over dL/ds_i * dSigmoid(a_i) * w_ij for all neurons i in the layer
+    dL/dw_ij = dL/ds_i * dActivation(a_i) * s_j
+    dL/db_i = dL/ds_i * dActivation(a_i)          (coefficient of 1)
+    dL/ds_j must be a sum over dL/ds_i * dActivation(a_i) * w_ij for all neurons i in the layer
      so these will be kept track of in a vector that will be assigned to activationGradient later
     */
     //start loop at last layer
@@ -142,8 +144,8 @@ void NeuralNetwork::backpropagation(const vector<double>& input, const vector<do
         //loop through neurons
         for(size_t node = 0; node < activation_gradient.size(); node++)
         {
-            //calculate dL/ds_i * dSigmoid(a_i), since this is used in all calculations
-            double sig_prime = activation_gradient[node] * dSigmoid(weighted_outputs[layer][node]);
+            //calculate dL/ds_i * dActivation(a_i), since this is used in all calculations
+            double sig_prime = activation_gradient[node] * dActivation(weighted_outputs[layer][node]);
             //calculate bias derivative and update bias
             double dL_db = sig_prime;
             biases[layer][node] -= dL_db * learning_rate;
@@ -194,4 +196,16 @@ std::ostream& operator<<(std::ostream& os, const NeuralNetwork& nn)
 NeuralNetwork::operator bool() const
 {
     return failed;
+}
+
+//activation function is leaky RELU
+double NeuralNetwork::activation(double x)
+{
+    return (x<0)*alpha*x + (x>=0)*x;
+}
+
+// Derivative of the activation function
+double NeuralNetwork::dActivation(double x) 
+{
+    return (x<0)*alpha + (x>=0);
 }

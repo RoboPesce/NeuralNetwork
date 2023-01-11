@@ -31,10 +31,6 @@ double dot(const std::vector<double>& a, const std::vector<double>& b);
 
 int maxIndex(const std::vector<double>& v);
 
-double  sigmoid(double x);
-
-double dSigmoid(double x);
-
 std::vector<double> softmax(const std::vector<double>& v);
 
 template <typename vtype>
