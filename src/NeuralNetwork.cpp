@@ -42,7 +42,7 @@ vector<double> NeuralNetwork::predict(const vector<double>& input)
     }
 
     // Return the predicted output values
-    return softmax(next_input);
+    return next_input;
 }
 
 vector<vector<double>> NeuralNetwork::predictGetWeightedOutputs(const vector<double>& input)
@@ -66,10 +66,11 @@ vector<vector<double>> NeuralNetwork::predictGetWeightedOutputs(const vector<dou
             output[i] =  dot(next_input, weights[layer][i]);
             output[i] += biases[layer][i];
         }
-        //add the output (activations for this layer) to the activations vector
+        //add the output to the outputs vector
         outputs[layer] = output;
         //apply activation
         for (size_t i = 0; i < output.size(); i++) output[i] = activation(output[i]);
+        
         // Update the input for the next layer of the network
         next_input = output;
     }
@@ -111,7 +112,7 @@ void NeuralNetwork::backpropagation(const vector<double>& input, const vector<do
     vector<vector<double>> weighted_outputs = predictGetWeightedOutputs(input);
     //calculate softmax of output layer
     vector<double> softmax_output = weighted_outputs.back();
-    for(size_t i = 0; i < softmax_output.size(); i++) softmax_output[i] = activation(softmax_output[i]);
+    //for(size_t i = 0; i < softmax_output.size(); i++) softmax_output[i] = activation(softmax_output[i]);
     softmax_output = softmax(softmax_output);
 
     //Vector of partial derivatives of output activations with respect to loss
