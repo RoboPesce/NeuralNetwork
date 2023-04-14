@@ -1,8 +1,8 @@
 #include "GlobalHelpers.h"
 
-double dot(const std::vector<double>& a, const std::vector<double>& b)
+NNvalue dot(const Layer& a, const Layer& b)
 {
-    double output = 0;
+    NNvalue output = 0;
 
     // Loop over the elements of a and b.
     for (size_t i = 0; i < a.size(); i++)
@@ -15,7 +15,7 @@ double dot(const std::vector<double>& a, const std::vector<double>& b)
     return output;
 }
 
-int maxIndex(const std::vector<double>& v)
+int maxIndex(const Layer& v)
 {
     int maxind = 0;
     for(size_t i = 0; i < v.size(); i++) if(v[maxind] < v[i]) maxind = i;
@@ -23,9 +23,9 @@ int maxIndex(const std::vector<double>& v)
 }
 
 //converts raw probabilities to normalized probabilities
-std::vector<double> softmax(const std::vector<double>& v)
+Layer softmax(const Layer& v)
 {
-    std::vector<double> soft = v;
+    Layer soft = v;
 
     double den_sum = 0;
     for(size_t i = 0; i < soft.size(); i++) 

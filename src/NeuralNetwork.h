@@ -11,9 +11,9 @@ private:
     //for parsing and writing NSU file
     NSUParser nsu;
     // Vector of weights, where each element is a vector of weights for a layer of the network
-    std::vector<std::vector<std::vector<double>>> weights;
+    Tensor weights;
     // Vector of biases, where each element is a vector of biases for a layer of the network
-    std::vector<std::vector<double>> biases;
+    Matrix biases;
 
     bool failed=false;
     
@@ -21,13 +21,13 @@ public:
     NeuralNetwork(std::string fname);
 
     //activation function
-    static double  activation(double x);
+    static NNvalue  activation(NNvalue x);
 
-    static double dActivation(double x);
+    static NNvalue dActivation(NNvalue x);
 
     // The forward propagation function, which takes in a point
     // and returns the predicted label for the point
-    std::vector<double> predict(const std::vector<double>& input);
+    Layer predict(const Layer& input);
 
     /*
      Forward propagation which returns the preactivation (weighted) outputs at each level 
@@ -35,16 +35,16 @@ public:
      Identical algorithm to predict(); use activations.back() and apply activation to each
      output to get predict() output
     */
-    std::vector<std::vector<double>> predictGetWeightedOutputs(const std::vector<double>& input);
+    Matrix predictGetWeightedOutputs(const Layer& input);
 
     //calculates the error for a single datapoint
     // @param predicted_output softmaxed output of neural network
     // @param desired_output one-hot category vector
-    static double calculateLoss(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
+    static NNvalue calculateLoss(const Layer& predicted_output, const Layer& desired_output);
 
-    static std::vector<double> lossGradient(const std::vector<double>& predicted_output, const std::vector<double>& desired_output);
+    static Layer lossGradient(const Layer& predicted_output, const Layer& desired_output);
 
-    void backpropagation(const std::vector<double>& input, const std::vector<double>& output, double learning_rate);
+    void backpropagation(const Layer& input, const Layer& output, double learning_rate);
 
     //update the nsu file with the learned data
     void updateNetwork();

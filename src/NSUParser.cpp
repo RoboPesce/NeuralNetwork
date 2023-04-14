@@ -4,7 +4,7 @@ using namespace std;
 
 NSUParser::NSUParser(string fname) : file(fname, ios::in), fpath(fname) {}
 
-int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<double>>& biases)
+int NSUParser::parse(Tensor& weights, Matrix& biases)
 {
     //in case this is being called a second time
     file.clear();
@@ -30,8 +30,8 @@ int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<doub
 
         cout << "Parsing layer " << layer+1 << " of size " << lsize << endl;
 
-        vector<double>& lbiases = biases[layer];
-        vector<vector<double>>& lweights = weights[layer];
+        Layer& lbiases = biases[layer];
+        Matrix& lweights = weights[layer];
         lbiases.resize(lsize);
         lweights.resize(lsize);
         for(int i = 0; i < lsize; i++) lweights[i].resize(plsize);
@@ -75,7 +75,7 @@ int NSUParser::parse(vector<vector<vector<double>>>& weights, vector<vector<doub
     return 0;
 }
 
-void NSUParser::write(vector<vector<vector<double>>>& weights, vector<vector<double>>& biases)
+void NSUParser::write(Tensor& weights, Matrix& biases)
 {
     file.close();
     //clear contents and write to file

@@ -12,9 +12,9 @@ public:
     //closes file
     ~NSUParser();
     //returns 0 if all works, else returns 1
-    int parse(std::vector<std::vector<std::vector<double>>>& weights, std::vector<std::vector<double>>& biases);
+    int parse(Tensor& weights, Matrix& biases);
 
-    void write(std::vector<std::vector<std::vector<double>>>& weights, std::vector<std::vector<double>>& biases);
+    void write(Tensor& weights, Matrix& biases);
 private:
     std::fstream file;
     std::string fpath;

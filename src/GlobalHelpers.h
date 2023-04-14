@@ -1,7 +1,8 @@
 #ifndef GLOBALHELPERS_H
 #define GLOBALHELPERS_H
 
-#define _USE_MATH_DEFINES
+#define M_PI 3.141592653
+#define M_E 2.7182818284
 #include <cmath>
 #include <ctime>
 #include <random>
@@ -11,27 +12,33 @@
 #include <string>
 #include <sstream>
 
+// typedefs for NN structure
+typedef float NNvalue;
+typedef std::vector<NNvalue> Layer;
+typedef std::vector<Layer> Matrix;
+typedef std::vector<Matrix> Tensor;
+
 //returns a random double between 0 and 1
 class Randomizer
 {
 private:
     std::mt19937 gen; // Standard mersenne_twister_engine seeded with rd()
-    std::uniform_real_distribution<double> dis;
+    std::uniform_real_distribution<NNvalue> dis;
 public:
     Randomizer() : gen(time(NULL)), dis(0, 1) { std::cout << "Initialized Randomizer" << std::endl; }
 
-    double randDouble()
+    NNvalue randValue()
     {
         return dis(gen);
     }
 };
 
 // Calculates the dot product between two vectors
-double dot(const std::vector<double>& a, const std::vector<double>& b);
+NNvalue dot(const Layer& a, const Layer& b);
 
-int maxIndex(const std::vector<double>& v);
+int maxIndex(const Layer& v);
 
-std::vector<double> softmax(const std::vector<double>& v);
+Layer softmax(const Layer& v);
 
 template <typename vtype>
 std::ostream& operator<<(std::ostream& os, const std::vector<vtype>& v)
