@@ -6,21 +6,21 @@ int main(int argc, char** argv)
 {
     if(argc < 4) 
     {
-        cout << "first arg: training size | second arg: step size | third arg: 0 for no overwrite, 1 for overwrite" << endl;
+        cout << "1st arg: NSU file name | 2nd arg: training size | 3rd arg: step size |4th arg: 0 for no overwrite, 1 for overwrite" << endl;
         return 1;
     }
     
     Randomizer random;
 
     // Create a neural network
-    NeuralNetwork nn("testnet.nsu");
+    NeuralNetwork nn(argv[1]);
     if(nn) return 1;
 
     /* 
     Create some random training data
     Assume that the label 0 -> 0.5sin(2pi x)+0.5<y and label 1 -> 0.5sin(2pi x)+0.5>=y
     */
-    int train_size = atoi(argv[1]);
+    int train_size = atoi(argv[2]);
     Matrix training_data(train_size);
     Matrix desired_outputs(train_size);
     for(int i = 0; i < train_size; i++)
@@ -57,7 +57,7 @@ int main(int argc, char** argv)
     cout << "Average loss: " << avg_loss << endl;
 
     cout << "Entering training\n" << endl;
-    float learning_rate = atof(argv[2]);
+    float learning_rate = atof(argv[3]);
     for(int i = 0; i < train_size; i++) 
     {
         cout << "for point " << training_data[i] << " (" << desired_outputs[i] << ')' << endl;
@@ -103,7 +103,7 @@ int main(int argc, char** argv)
     cout << "Average loss: " << avg_loss << '\n' << endl;
 
     //only update if user wants
-    if(argv[3][0] == '1') nn.updateNetwork();
+    if(argv[4][0] == '1') nn.updateNetwork();
 
     return 0;
 }
